@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+
+    public function authors(){
+        //pertenece a muchos
+        return $this->belongsToMany(Author::class);
+    }
+
+    public function copies(){
+        //tiene muchos
+        return $this->hasMany(Copy::class);
+    }
 }

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Copy extends Model
 {
     use HasFactory;
+
+    public function book(){
+        return $this->belongsTo(Book::class);
+    }
+
+    public function loans(){
+        return $this->hasMany(Loan::class);
+    }
 }
