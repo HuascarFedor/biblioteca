@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+/*
+|--------------------------------------------------------------------------
+| CRUD Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::resource('authors', AuthorController::class)->middleware(['auth']);
