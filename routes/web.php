@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,5 @@ require __DIR__.'/auth.php';
 */
 
 Route::resource('authors', AuthorController::class)->middleware(['auth']);
+
+Route::resource('books', BookController::class)->middleware(['auth']);

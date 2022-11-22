@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
-class AuthorController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::orderBy('id', 'DESC')->paginate(5);
-        return view('authors.index', compact('authors'));
+        $books = Book::orderBy('id', 'DESC')->paginate(3);
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -25,7 +25,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('authors.create');
+        //
     }
 
     /**
@@ -36,14 +36,7 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:authors|max:100',
-        ]);
-        $author = Author::create([
-            'name' => $request->name,
-        ]);
-        $author->save();
-        return redirect()->route('authors.index')->with('success', 'Item added');
+        //
     }
 
     /**
@@ -63,9 +56,9 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Author $author)
+    public function edit($id)
     {
-        return view('authors.edit', compact('author'));
+        //
     }
 
     /**
@@ -75,16 +68,9 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:100',
-        ]);
-        $author->fill([
-            'name' => $request->name,
-        ]);
-        $author->save();
-        return redirect()->route('authors.index')->with('success', 'Item updated');
+        //
     }
 
     /**
@@ -93,9 +79,8 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author)
+    public function destroy($id)
     {
-        $author->delete();
-        return redirect()->route('authors.index')->with('success', 'Item deleted');
+        //
     }
 }
