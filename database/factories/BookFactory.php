@@ -19,7 +19,7 @@ class BookFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'editorial' => $this->faker->word(),
-            'cover' => $this->faker->imageUrl(),
+            //'cover' => $this->faker->imageUrl(),
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BookController extends Controller
 {
@@ -25,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -36,7 +37,26 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255|unique:books',
+            'editorial' => 'required',
+            'cover' => 'image|mimes:jpeg,jpg,png,gif,svg'
+        ]);
+        $cover = 'public/covers/no-image.png';
+        if($request->hasFile('cover'))
+            $cover = $request->cover->store('public/covers');
+        $book = Book::create([
+            'title' => $request->title,
+            'editorial' => $request->editorial,
+            'cover' => $cover
+        ]);
+        $book->save();
+        $writers = Session::get('writers');
+        foreach($writers as $writer){
+            $book->authors()->attach($writer['id']);
+        }
+        Session::forget('writers');
+        return redirect()->route('books.index')->with('success', 'Item added');
     }
 
     /**
@@ -79,8 +99,10 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        //
+        $book->deleteCover();
+        $book->delete();
+        return redirect()->route('books.index')->with('success', 'Item deleted');
     }
 }

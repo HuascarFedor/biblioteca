@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('editorial');
-            $table->string('cover');
+            $table->string('cover')->default('public/covers/no-image.png');
             $table->timestamps();
         });
     }
