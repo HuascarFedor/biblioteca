@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:authors.index')->only('index');
+        $this->middleware('can:authors.create')->only('create', 'store');
+        $this->middleware('can:authors.edit')->only('edit', 'update');
+        $this->middleware('can:authors.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

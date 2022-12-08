@@ -15,9 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('authors.index')" :active="request()->routeIs('authors.index')">
-                        {{ __('Authors') }}
-                    </x-nav-link>
+                    @can('authors.index')    
+                        <x-nav-link :href="route('authors.index')" :active="request()->routeIs('authors.index')">
+                            {{ __('Authors') }}
+                        </x-nav-link>
+                    @endcan
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
                         {{ __('Books') }}
                     </x-nav-link>
@@ -72,9 +74,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('authors.index')" :active="request()->routeIs('authors.index')">
-                {{ __('Authors') }}
-            </x-responsive-nav-link>
+            @can('authors.index')    
+                <x-responsive-nav-link :href="route('authors.index')" :active="request()->routeIs('authors.index')">
+                    {{ __('Authors') }}
+                </x-responsive-nav-link>
+            @endcan
             <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
                 {{ __('Books') }}
             </x-responsive-nav-link>
